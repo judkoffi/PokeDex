@@ -1,0 +1,21 @@
+enum PokemonType {
+  NORMAL,
+  FIRE,
+  FIGTHING,
+  WATER,
+  FLYING,
+  GRASS,
+  POISON,
+  ELECTRIC,
+  GROUND,
+  PSYCHIC,
+  ROCK,
+  ICE,
+  BUG,
+  DRAGON,
+  GHOST,
+  DARK,
+  STEEL,
+  FAIRRY,
+  UNKNOWN
+}
