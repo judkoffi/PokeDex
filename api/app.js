@@ -4,7 +4,7 @@ const databse = require('./helpers/databaseMock');
 const express = require('express');
 const app = express();
 
-let serverConfig = new ServerConfiguration('192.168.1.24', 8000);
+let serverConfig = new ServerConfiguration('localhost', 8000);
 
 app.get('/', (req, res) => res.send(''));
 

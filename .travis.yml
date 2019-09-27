@@ -4,5 +4,5 @@ node_js:
 
 script:
   - cd api
-  - ls
-  #- npm install
+  - npm install
+  - node 
