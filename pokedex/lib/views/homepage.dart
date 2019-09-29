@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/services/api.dart';
 import 'package:pokedex/views/pokemonprofile.dart';
@@ -14,22 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var pokemons = List<Pokemon>();
-  void _getPokemons() {
-    API.getPokemons().then((response) {
-      setState(() {
-        Iterable list = json.decode(response.body);
-        pokemons = list.map((elt) => Pokemon.fromJson(elt)).toList();
-      });
-    }).catchError((onError) => print(onError));
-  }
-
   dispose() {
     super.dispose();
   }
 
   initState() {
-    _getPokemons();
     super.initState();
   }
 
@@ -86,6 +75,27 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget pokemons() {
+    return FutureBuilder(
+      builder: (context, promise) {
+        if (promise.connectionState == ConnectionState.none &&
+            promise.hasData == null) {
+          return Container();
+        }
+        if (promise.connectionState == ConnectionState.waiting) {
+          return new SpinKitDoubleBounce(
+            color: Colors.white,
+          );
+        }
+        return ListView.builder(
+          itemCount: promise.data.length,
+          itemBuilder: (context, index) => buildCard(promise.data[index]),
+        );
+      },
+      future: API.getPokemons(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,10 +103,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       ),
-      body: ListView.builder(
-        itemCount: pokemons.length,
-        itemBuilder: (context, index) => buildCard(pokemons[index]),
-      ),
+      body: pokemons(),
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
     );
   }
