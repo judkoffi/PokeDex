@@ -1,0 +1,15 @@
+D: /package
+D: /package/services
+D: /package/services/metadata
+D: /package/services/metadata/core-properties
+F: /package/services/metadata/core-properties/d8ad3caf01ce470a8a1f355b365c58d5.psmdcp
+D: /_rels
+F: /_rels/.rels
+D: /lib
+D: /lib/netstandard2.0
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Antiforgery.dll
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Antiforgery.xml
+F: /Microsoft.AspNetCore.Antiforgery.nuspec
+F: /.signature.p7s
+F: /[Content_Types].xml
+F: /microsoft.aspnetcore.antiforgery.2.2.0.nupkg

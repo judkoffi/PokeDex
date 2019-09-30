@@ -1,0 +1,15 @@
+D: /package
+D: /package/services
+D: /package/services/metadata
+D: /package/services/metadata/core-properties
+F: /package/services/metadata/core-properties/3213a4cac173438db052e28f59826020.psmdcp
+D: /_rels
+F: /_rels/.rels
+D: /lib
+D: /lib/netstandard2.0
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Localization.xml
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Localization.dll
+F: /.signature.p7s
+F: /microsoft.aspnetcore.localization.2.2.0.nupkg
+F: /[Content_Types].xml
+F: /Microsoft.AspNetCore.Localization.nuspec

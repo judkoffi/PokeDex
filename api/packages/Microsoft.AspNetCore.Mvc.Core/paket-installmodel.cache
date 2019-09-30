@@ -1,0 +1,15 @@
+D: /package
+D: /package/services
+D: /package/services/metadata
+D: /package/services/metadata/core-properties
+F: /package/services/metadata/core-properties/ae6151ae43a84931b9588fef57403271.psmdcp
+D: /_rels
+F: /_rels/.rels
+D: /lib
+D: /lib/netstandard2.0
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Core.xml
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Core.dll
+F: /microsoft.aspnetcore.mvc.core.2.2.5.nupkg
+F: /.signature.p7s
+F: /[Content_Types].xml
+F: /Microsoft.AspNetCore.Mvc.Core.nuspec

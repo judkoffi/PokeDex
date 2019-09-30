@@ -1,0 +1,15 @@
+D: /package
+D: /package/services
+D: /package/services/metadata
+D: /package/services/metadata/core-properties
+F: /package/services/metadata/core-properties/89fbb7fdfaca428c97494ec41cca4044.psmdcp
+D: /_rels
+F: /_rels/.rels
+D: /lib
+D: /lib/netstandard2.0
+F: /lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll
+F: /lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.xml
+F: /microsoft.aspnetcore.jsonpatch.3.0.0.nupkg
+F: /Microsoft.AspNetCore.JsonPatch.nuspec
+F: /.signature.p7s
+F: /[Content_Types].xml

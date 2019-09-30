@@ -1,0 +1,15 @@
+D: /package
+D: /package/services
+D: /package/services/metadata
+D: /package/services/metadata/core-properties
+F: /package/services/metadata/core-properties/fdee45e654c74bf8976efa96eb9075af.psmdcp
+D: /_rels
+F: /_rels/.rels
+D: /lib
+D: /lib/netstandard2.0
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Mvc.ViewFeatures.xml
+F: /.signature.p7s
+F: /microsoft.aspnetcore.mvc.viewfeatures.2.2.0.nupkg
+F: /[Content_Types].xml
+F: /Microsoft.AspNetCore.Mvc.ViewFeatures.nuspec

@@ -1,0 +1,15 @@
+D: /package
+D: /package/services
+D: /package/services/metadata
+D: /package/services/metadata/core-properties
+F: /package/services/metadata/core-properties/7cbbbe9e351441cfb4664cae108b89b1.psmdcp
+D: /_rels
+F: /_rels/.rels
+D: /lib
+D: /lib/netstandard2.0
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Cors.xml
+F: /lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Cors.dll
+F: /microsoft.aspnetcore.mvc.cors.2.2.0.nupkg
+F: /.signature.p7s
+F: /[Content_Types].xml
+F: /Microsoft.AspNetCore.Mvc.Cors.nuspec

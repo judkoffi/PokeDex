@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>Microsoft</dc:creator>
+  <dc:description>ASP.NET Core middleware for automatically applying culture information to HTTP requests. Culture information can be specified in the HTTP header, query string, cookie, or custom source.
+
+This package was built from the source code at https://github.com/aspnet/Localization/tree/de1579bdda645ba8631403af8720929b76939853</dc:description>
+  <dc:identifier>Microsoft.AspNetCore.Localization</dc:identifier>
+  <version>2.2.0</version>
+  <keywords>aspnetcore localization</keywords>
+  <lastModifiedBy>NuGet.Build.Tasks.Pack, Version=4.9.0.5, Culture=neutral, PublicKeyToken=31bf3856ad364e35;</lastModifiedBy>
+</coreProperties>
