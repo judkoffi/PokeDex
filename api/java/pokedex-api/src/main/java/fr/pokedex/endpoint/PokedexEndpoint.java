@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
-import fr.pokedex.orm.PokeRepository;
+import fr.pokedex.service.PokeService;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
@@ -16,12 +16,12 @@ import fr.pokedex.orm.PokeRepository;
 public class PokedexEndpoint {
 
   @Inject
-  PokeRepository repository;
+  PokeService service;
 
   @GET
   @Path("/pokemons")
   public Response pokemons() {
-    var pokemons = repository.getAll();
+    var pokemons = service.getAll();
     return Response.ok().entity(pokemons).build();
   }
 
@@ -35,7 +35,8 @@ public class PokedexEndpoint {
   public Response pokemon(@PathParam String id) {
     if (!checkIdParam(id))
       return Response.status(400).build();
-    var pokemon = repository.findOne(id);
+    
+    var pokemon = service.findOne(id);
     return Response.ok().entity(pokemon).build();
   }
 
