@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Type="http://schemas.microsoft.com/packaging/2010/07/manifest" Target="/Newtonsoft.Json.Bson.nuspec" Id="Re0dadd9b8d8349f3" />
-  <Relationship Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="/package/services/metadata/core-properties/edf8d76a1aaf4b9cae313c1c3e39ae93.psmdcp" Id="Rf2f38ab9fb9b430c" />
-</Relationships>
