@@ -50,6 +50,7 @@ public class PokeService {
     var key = Integer.parseInt(id);
     if (cache.containsKey(key))
       return cache.get(key);
+
     var pokemon = entityToModel(repository.find("id = ?1", key).firstResult());
     cache.put(key, pokemon);
     return pokemon;

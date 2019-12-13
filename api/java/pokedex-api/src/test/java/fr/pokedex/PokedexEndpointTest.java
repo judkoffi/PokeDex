@@ -11,7 +11,6 @@ public class PokedexEndpointTest {
 
   @Test
   public void testHelloEndpoint() {
-    given().when().get("/api").then().statusCode(200).body(is("hello"));
   }
 
 }
