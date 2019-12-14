@@ -16,6 +16,7 @@ env:
     - PACKAGE="pokeapi.java.tar.gz"
  
 script:
+  - cp ftp.sh $API_FOLDER/.
   - cd $API_FOLDER
   - ./mvnw package
   - mkdir package
