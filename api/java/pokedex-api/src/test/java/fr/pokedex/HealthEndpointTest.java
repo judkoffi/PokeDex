@@ -9,6 +9,6 @@ import io.quarkus.test.junit.QuarkusTest;
 public class HealthEndpointTest {
   @Test
   public void testHelloEndpoint() {
-    given().when().get("/health").then().statusCode(200).body(is("yao"));
+    given().when().get("/api/health").then().statusCode(200).body(is("yao"));
   }
 }
