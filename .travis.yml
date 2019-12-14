@@ -24,4 +24,5 @@ script:
   - mkdir package
   - cp target/$ARTEFACT package/$JARNAME
   - tar cvzf $PACKAGE package/
+  - ls
   - sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
