@@ -19,10 +19,9 @@ before_install:
   - sudo apt-get -y install sshpass
 
 script:
-  - cp ftp.sh $API_FOLDER/.
   - cd $API_FOLDER
   - ./mvnw package
   - mkdir package
   - cp target/$ARTEFACT package/$JARNAME
   - tar cvzf $PACKAGE package/
-  - sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
+  - echo sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
