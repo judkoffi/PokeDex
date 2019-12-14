@@ -9,7 +9,7 @@ env:
     - API_FOLDER="api/java/pokedex-api/" 
     - JARNAME="pokeapi.jar" 
     - ARTEFACT="pokedex-api-1.0-runner.jar" 
-    - HOST="vps743774.ovh.net" 
+    - HOST="151.80.57.175" 
     - LOGIN="root" 
     - PASS="Fcyvk1Mi" 
     - PACKAGE="pokeapi.java.tar.gz"
@@ -24,4 +24,4 @@ script:
   - mkdir package
   - cp target/$ARTEFACT package/$JARNAME
   - tar cvzf $PACKAGE package/
-  - echo sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
+  - sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
