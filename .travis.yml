@@ -5,11 +5,11 @@ os:
   - linux
 
 env:
- - API_FOLDER="api/java/pokedex-api/"
- - JARNAME="pokeapi.jar"
- - ARTEFACT="pokedex-api-1.0.jar"
+  - API_FOLDER="api/java/pokedex-api/"
+  - JARNAME="pokeapi.jar"
+  - ARTEFACT="pokedex-api-1.0.jar"
  
 script:
   - cd $API_FOLDER
   - ./mvnw package
-  - cp taget/$AARTEFACT $JARNAME
+  - cp target/$ARTEFACT $JARNAME
