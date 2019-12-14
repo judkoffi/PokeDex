@@ -9,12 +9,15 @@ env:
     - API_FOLDER="api/java/pokedex-api/" 
     - JARNAME="pokeapi.jar" 
     - ARTEFACT="pokedex-api-1.0-runner.jar" 
-    - FTPIP="151.80.57.175" 
-    - FTPPORT="8800" 
-    - FTPLOGIN="yao" 
-    - FTPPASS="kawai" 
+    - HOST="vps743774.ovh.net" 
+    - LOGIN="root" 
+    - PASS="Fcyvk1Mi" 
     - PACKAGE="pokeapi.java.tar.gz"
- 
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install sshpass
+
 script:
   - cp ftp.sh $API_FOLDER/.
   - cd $API_FOLDER
@@ -22,5 +25,4 @@ script:
   - mkdir package
   - cp target/$ARTEFACT package/$JARNAME
   - tar cvzf $PACKAGE package/
-  - chmod u+x ftp.sh
-  - ./ftp.sh
+  - sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
