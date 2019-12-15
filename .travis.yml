@@ -25,4 +25,4 @@ script:
   - cp target/$ARTEFACT dir/$JARNAME
   - tar cvzf $PACKAGE dir/
   - stat $(pwd)/$PACKAGE
-  - sshpass -p $PASS scp $(pwd)/$PACKAGE root@$HOST:~/deploy/
+  - sshpass -p $PASS scp -o StrictHostKeyChecking=no $(pwd)/$PACKAGE root@$HOST:~/deploy/
