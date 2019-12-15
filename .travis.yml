@@ -22,6 +22,6 @@ script:
   - cd $API_FOLDER
   - ./mvnw package
   - mkdir dir
-  - cp target/$ARTEFACT package/$JARNAME
+  - cp target/$ARTEFACT dir/$JARNAME
   - tar cvzf $PACKAGE dir/
   - sshpass -p $PASS scp $(pwd)/$PACKAGE root@$HOST:~/deploy/
