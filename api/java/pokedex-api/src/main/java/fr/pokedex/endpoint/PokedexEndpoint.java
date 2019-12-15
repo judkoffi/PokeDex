@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import fr.pokedex.service.PokeService;
 
-@Path("/api")
+@Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PokedexEndpoint {
@@ -25,7 +25,6 @@ public class PokedexEndpoint {
     return Response.ok().entity(pokemons).build();
   }
 
-
   private boolean checkIdParam(String id) {
     return !id.isBlank() && !id.isEmpty() && id.matches("^[0-9]*$");
   }
@@ -35,7 +34,7 @@ public class PokedexEndpoint {
   public Response pokemon(@PathParam String id) {
     if (!checkIdParam(id))
       return Response.status(400).build();
-    
+
     var pokemon = service.findOne(id);
     return Response.ok().entity(pokemon).build();
   }

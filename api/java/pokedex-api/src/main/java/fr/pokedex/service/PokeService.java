@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import fr.pokedex.model.Pokemon;
+import fr.pokedex.model.Pokemon.POKEMONTYPES;
 import fr.pokedex.orm.PokeRepository;
 import fr.pokedex.orm.PokemonEntity;
 
@@ -20,22 +21,46 @@ public class PokeService {
     this.cache = new HashMap<>();
   }
 
+  private static <T extends Enum<T>> T getEnumFromString(Class<T> declaringClass, String str) {
+    if (declaringClass != null && str != null) {
+      try {
+        return Enum.valueOf(declaringClass, str.trim().toUpperCase());
+      } catch (IllegalArgumentException e) {
+        throw new AssertionError(e);
+      }
+    }
+    return null;
+  }
+
+  private static POKEMONTYPES fromString(String name) {
+    return getEnumFromString(POKEMONTYPES.class, name);
+  }
+
   private static Pokemon entityToModel(PokemonEntity entity) {
-    var pokemon = new Pokemon();
-    pokemon.id = entity.id;
-    pokemon.name = entity.name;
-    pokemon.num = entity.num;
-    pokemon.img = entity.img;
-    pokemon.avgSpawns = entity.avgSpawns;
-    pokemon.candy = entity.candy;
-    pokemon.spawn = entity.spawn;
-    pokemon.spawnTime = entity.spawnTime;
-    pokemon.egg = entity.egg;
-    pokemon.height = entity.height;
-    pokemon.weight = entity.weight;
-    pokemon.type = entity.type;
-    pokemon.weakness = entity.weakness;
-    return pokemon;
+    var id = entity.id;
+    var name = entity.name;
+    var num = entity.num;
+    var img = entity.img;
+    var avgSpawns = entity.avgSpawns;
+    var candy = entity.candy;
+    var spawn = entity.spawn;
+    var spawnTime = entity.spawnTime;
+    var egg = entity.egg;
+    var height = entity.height;
+    var weight = entity.weight;
+    var type = entity//
+        .type//
+          .stream()
+          .map(PokeService::fromString)
+          .collect(Collectors.toList());
+    var weakness = entity.//
+        weaknesses//
+          .stream()
+          .map(PokeService::fromString)
+          .collect(Collectors.toList());
+
+    return new Pokemon(id, name, img, num, spawn, avgSpawns, spawnTime, height, weight, candy, egg,
+        type, weakness);
   }
 
   public List<Pokemon> getAll() {
