@@ -11,6 +11,7 @@ env:
     - ARTEFACT="pokedex-api-1.0-runner.jar" 
     - HOST="151.80.57.175" 
     - LOGIN="root" 
+    - PASS="Fcyvk1Mi"
     - PACKAGE="pokeapi.java.tar.gz"
 
 before_install:
@@ -20,8 +21,7 @@ before_install:
 script:
   - cd $API_FOLDER
   - ./mvnw package
-  - mkdir package
+  - mkdir dir
   - cp target/$ARTEFACT package/$JARNAME
-  - tar cvzf $PACKAGE package/
-  - ls
-  - #sshpass -p $PASS scp $PACKAGE root@$HOST:~/deploy/
+  - tar cvzf $PACKAGE dir/
+  - sshpass -p $PASS scp $(pwd)/$PACKAGE root@$HOST:~/deploy/
