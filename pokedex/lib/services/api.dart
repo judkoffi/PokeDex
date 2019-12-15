@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:pokedex/models/pokemon.dart';
 
 class API {
-  static final String baseUrl = 'http://192.168.43.184:8000';
+  static final String baseUrl = 'http://151.80.57.175:8080';
 
   static Future getPokemons() async {
     var url = baseUrl + '/pokemons';

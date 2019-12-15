@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  Card buildCard(Pokemon pokemon) {
+  Card _buildCard(Pokemon pokemon) {
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -75,22 +75,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget pokemons() {
-    return FutureBuilder(
+  Widget _body() {
+    return new FutureBuilder(
       builder: (context, promise) {
-        if (promise.connectionState == ConnectionState.none &&
-            promise.hasData == null) {
-          return Container();
+        switch (promise.connectionState) {
+          case ConnectionState.waiting:
+            return new SpinKitDoubleBounce(
+              color: Colors.white,
+            );
+          case ConnectionState.none:
+            return new Container();
+          default:
+            return ListView.builder(
+              itemCount: promise.data.length,
+              itemBuilder: (context, index) => _buildCard(promise.data[index]),
+            );
         }
-        if (promise.connectionState == ConnectionState.waiting) {
-          return new SpinKitDoubleBounce(
-            color: Colors.white,
-          );
-        }
-        return ListView.builder(
-          itemCount: promise.data.length,
-          itemBuilder: (context, index) => buildCard(promise.data[index]),
-        );
       },
       future: API.getPokemons(),
     );
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       ),
-      body: pokemons(),
+      body: _body(),
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
     );
   }
