@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/models/pokemon.dart';
 
-class PokemonProfile extends StatelessWidget {
+class PokemonDetail extends StatelessWidget {
   final Pokemon pokemon;
 
-  const PokemonProfile({Key key, this.pokemon}) : super(key: key);
+  const PokemonDetail({Key key, this.pokemon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

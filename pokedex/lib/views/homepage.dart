@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/services/api.dart';
-import 'package:pokedex/views/pokemonprofile.dart';
+import 'package:pokedex/views/pokemondetail.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (context) => PokemonProfile(pokemon: pokemon),
+                builder: (context) => PokemonDetail(pokemon: pokemon),
               ),
             );
           },
@@ -77,8 +77,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget _body() {
     return new FutureBuilder(
-      builder: (context, promise) {
-        switch (promise.connectionState) {
+      builder: (context, future) {
+        switch (future.connectionState) {
           case ConnectionState.waiting:
             return new SpinKitDoubleBounce(
               color: Colors.white,
@@ -87,8 +87,8 @@ class _HomePageState extends State<HomePage> {
             return new Container();
           default:
             return ListView.builder(
-              itemCount: promise.data.length,
-              itemBuilder: (context, index) => _buildCard(promise.data[index]),
+              itemCount: future.data.length,
+              itemBuilder: (context, index) => _buildCard(future.data[index]),
             );
         }
       },

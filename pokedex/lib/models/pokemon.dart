@@ -37,5 +37,6 @@ class Pokemon {
         _buildTypes(json['type']).map((elt) => elt).toList());
     this.weaknesses = new List<PokemonType>.from(
         _buildTypes(json['weaknesses']).map((elt) => elt).toList());
-  */}
+  */
+  }
 }
