@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final API api = new API();
   dispose() {
     super.dispose();
   }
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
             );
         }
       },
-      future: API.getPokemons(),
+      future: api.getPokemons(),
     );
   }
 

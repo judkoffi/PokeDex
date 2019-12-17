@@ -9,7 +9,7 @@ class PokemonDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final headerContainer = new Container(
+    /*final headerContainer = new Container(
       child: new Container(
         child: new LinearProgressIndicator(
           backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
@@ -38,9 +38,9 @@ class PokemonDetail extends StatelessWidget {
           children: <Widget>[headerContainer],
         ),
       ],
-    );
+    );*/
 
-    final topContent = new Stack(
+    final pictureFrame = new Stack(
       children: <Widget>[
         new Container(
           padding: new EdgeInsets.only(left: 10.0),
@@ -51,9 +51,8 @@ class PokemonDetail extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.5,
           padding: new EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
-          decoration: new BoxDecoration(color: Color.fromRGBO(58, 66, 86, 0.4)),
-          child: new Center(
-            child: topContentText,
+          decoration: new BoxDecoration(
+            color: Color.fromRGBO(58, 66, 86, 0.4),
           ),
         ),
         new Positioned(
@@ -63,31 +62,35 @@ class PokemonDetail extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: new Icon(Icons.arrow_back, color: Colors.white),
+            child: new Icon(Icons.arrow_back, color: Colors.grey),
           ),
         )
       ],
     );
 
-    final bottomContentText = new Text(
-      pokemon.name,
-      style: new TextStyle(fontSize: 18.0, color: Colors.white),
-    );
-
-    final bottomContent = new Container(
+    final middleFrame = new Container(
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).primaryColor,
       padding: new EdgeInsets.all(40.0),
       child: new Center(
         child: new Column(
-          children: <Widget>[bottomContentText],
+          children: <Widget>[
+            new Text(
+              pokemon.name,
+              style: new TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+          ],
         ),
       ),
     );
 
+    final bottomnFrame = new Stack(
+      children: <Widget>[],
+    );
+
     return new Scaffold(
       body: new Column(
-        children: <Widget>[topContent, bottomContent],
+        children: <Widget>[pictureFrame, middleFrame, bottomnFrame],
       ),
     );
   }
