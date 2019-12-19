@@ -71,7 +71,7 @@ class PokemonDetail extends StatelessWidget {
     final middleFrame = new Container(
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).primaryColor,
-      padding: new EdgeInsets.all(40.0),
+      padding: new EdgeInsets.all(20.0),
       child: new Center(
         child: new Column(
           children: <Widget>[
@@ -84,13 +84,39 @@ class PokemonDetail extends StatelessWidget {
       ),
     );
 
-    final bottomnFrame = new Stack(
-      children: <Widget>[],
+    final _createRadiusRect = (text) => new Container(
+          width: MediaQuery.of(context).size.width,
+          padding: new EdgeInsets.all(5.0),
+          decoration: new BoxDecoration(
+              border: new Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(5.0)),
+          child: new Text(
+            // "\$20",
+            text,
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+
+    final b = new Container(
+      width: MediaQuery.of(context).size.width,
+      color: Theme.of(context).primaryColor,
+      child: new Row(
+        children:
+            pokemon.types.map((label) => new Text(label.toString())).toList(),
+      ),
+    );
+
+    final bottomnFrame = new Container(
+      width: MediaQuery.of(context).size.width,
+      color: Theme.of(context).primaryColor,
+      child: new Row(
+        children: <Widget>[_createRadiusRect(pokemon.pokemonInfos.weight)],
+      ),
     );
 
     return new Scaffold(
       body: new Column(
-        children: <Widget>[pictureFrame, middleFrame, bottomnFrame],
+        children: <Widget>[pictureFrame, middleFrame, bottomnFrame, b],
       ),
     );
   }

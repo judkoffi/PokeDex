@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:pokedex/models/pokemoninfo.dart';
 import 'package:pokedex/models/pokemontype.dart';
 
@@ -15,10 +16,6 @@ class Pokemon {
   Pokemon(this.id, this.name, this.picture, this.candy, this.egg,
       this.mutlipliers, this.weaknesses, this.pokemonInfos, this.types);
 
-  Iterable _buildTypes(Iterable types) {
-    return types.map((value) => PokemonType.values.where(
-        (e) => e.toString().toUpperCase() == value.toString().toUpperCase()));
-  }
   /*
   "avgSpawns": 69,
 "candy": "Bulbasaur Candy",
@@ -47,16 +44,17 @@ class Pokemon {
     this.mutlipliers = json['multipliers'];
     this.pokemonInfos = new PokemonInfo(json['height'], json['weight'], "-1",
         json['avgSpawns'].toString(), json['spawnTime'].toString());
-    /*this.types = new List<PokemonType>.from(
-        _buildTypes(json['type']).map((elt) => elt).toList());
-    this.weaknesses = new List<PokemonType>.from(
-        _buildTypes(json['weaknesses']).map((elt) => elt).toList());
-  */
+    this.types = List.of(json['type'])
+        .map((type) => EnumToString.fromString(PokemonType.values, type))
+        .toList();
+    this.weaknesses = List.of(json['type'])
+        .map((type) => EnumToString.fromString(PokemonType.values, type))
+        .toList();
   }
 
   @override
   bool operator ==(o) => o is Pokemon && name == o.name && id == o.id;
-  
+
   @override
   int get hashCode => name.hashCode ^ id.hashCode;
 }

@@ -39,29 +39,21 @@ public class PokeService {
   private static Pokemon entityToModel(PokemonEntity entity) {
     var id = entity.id;
     var name = entity.name;
-    var num = entity.num;
-    var img = entity.img;
-    var avgSpawns = entity.avgSpawns;
-    var candy = entity.candy;
-    var spawn = entity.spawn;
-    var spawnTime = entity.spawnTime;
-    var egg = entity.egg;
-    var height = entity.height;
-    var weight = entity.weight;
+    var attack = entity.attack;
+    var speed = entity.speed;
+    var defense = entity.defense;
+    var total = entity.total;
+    var sprites = entity.sprites;    
     var type = entity//
         .type//
           .stream()
           .map(PokeService::fromString)
           .collect(Collectors.toList());
-    var weakness = entity.//
-        weaknesses//
-          .stream()
-          .map(PokeService::fromString)
-          .collect(Collectors.toList());
 
-    return new Pokemon(id, name, img, num, spawn, avgSpawns, spawnTime, height, weight, candy, egg,
-        type, weakness);
+   return new Pokemon(total, id, name, sprites, attack, defense, speed, type);  
   }
+  
+  
 
   public List<Pokemon> getAll() {
     return repository
