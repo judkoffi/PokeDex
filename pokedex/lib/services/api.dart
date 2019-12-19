@@ -9,12 +9,13 @@ class API {
 
   Future getPokemons() async {
     var url = baseUrl + '/pokemons';
-    // if (cache.isNotEmpty) {
-    //   return Future.value(List.of(cache.values));
-    // }
+    if (cache.isNotEmpty) {
+      return Future.value(List.of(cache.values));
+    }
     try {
-      var request = await http.get(url);
-      Iterable list = json.decode(request.body);
+      var request =
+          await http.get(url, headers: {'Content-Type': 'application/json'});
+      Iterable list = json.decode(utf8.decode(request.bodyBytes));
       var pokemons = list.map((elt) => Pokemon.fromJson(elt)).toList();
       pokemons
           .forEach((pokemon) => cache.putIfAbsent(pokemon.id, () => pokemon));

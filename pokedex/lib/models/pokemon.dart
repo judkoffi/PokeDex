@@ -1,5 +1,4 @@
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:pokedex/models/pokemoninfo.dart';
 import 'package:pokedex/models/pokemontype.dart';
 
 class Pokemon {
@@ -21,7 +20,7 @@ class Pokemon {
     this.attack = json['attack'];
     this.defense = json['defense'];
     this.speed = json['speed'];
-    this.sprites = json['sprites'];
+    this.sprites = Map.from(json['sprites']);
     this.types = List.of(json['type'])
         .map((type) => EnumToString.fromString(PokemonType.values, type))
         .toList();

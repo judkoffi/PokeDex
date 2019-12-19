@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/services/api.dart';
 import 'package:pokedex/views/pokemondetail.dart';
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Image.network(
-              pokemon.sprites["normal"],
+              new String.fromCharCodes(pokemon.sprites["normal"].codeUnits),
               fit: BoxFit.cover,
             ),
           ),

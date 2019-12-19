@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/models/pokemon.dart';
@@ -45,7 +47,7 @@ class PokemonDetail extends StatelessWidget {
         new Container(
           padding: new EdgeInsets.only(left: 10.0),
           height: MediaQuery.of(context).size.height * 0.5,
-          child: new Image.network(pokemon.sprites["large"], fit: BoxFit.cover),
+          child: Image.network(pokemon.sprites["large"], fit: BoxFit.cover),
         ),
         new Container(
           height: MediaQuery.of(context).size.height * 0.5,
@@ -68,6 +70,16 @@ class PokemonDetail extends StatelessWidget {
       ],
     );
 
+    final pictureAnimatedFrame = new Stack(
+      children: <Widget>[
+        new Container(
+          padding: new EdgeInsets.only(left: 15.0),
+          height: MediaQuery.of(context).size.height * 0.3,
+          child: Image.network(pokemon.sprites["animated"], fit: BoxFit.cover),
+        ),
+      ],
+    );
+    /*
     final middleFrame = new Container(
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).primaryColor,
@@ -82,41 +94,43 @@ class PokemonDetail extends StatelessWidget {
           ],
         ),
       ),
-    );
+    );*/
 
-    final _createRadiusRect = (text) => new Container(
-          width: MediaQuery.of(context).size.width,
-          padding: new EdgeInsets.all(5.0),
-          decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(5.0)),
-          child: new Text(
-            // "\$20",
-            text,
-            style: TextStyle(color: Colors.white),
+    final middleFrame = new Container(
+      width: MediaQuery.of(context).size.width,
+      color: Theme.of(context).primaryColor,
+      padding: new EdgeInsets.all(20.0),
+      child: new Row(
+        children: <Widget>[
+          new Text(
+            pokemon.name,
+            style: new TextStyle(fontSize: 18.0, color: Colors.white),
           ),
-        );
-
-    final b = new Container(
-      width: MediaQuery.of(context).size.width,
-      color: Theme.of(context).primaryColor,
-      child: new Row(
-        children:
-            pokemon.types.map((label) => new Text(label.toString())).toList(),
-      ),
-    );
-
-    final bottomnFrame = new Container(
-      width: MediaQuery.of(context).size.width,
-      color: Theme.of(context).primaryColor,
-      child: new Row(
-        children: <Widget>[_createRadiusRect(pokemon.attack)],
+          new VerticalDivider(
+            color: Colors.green,
+            width: 20,
+          ),
+          new Row(
+            children: pokemon.types
+                .map(
+                  (type) => new DecoratedBox(
+                    decoration: new BoxDecoration(
+                      border: new Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Image.network(pokemon.sprites["animated"],
+                        fit: BoxFit.cover),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
       ),
     );
 
     return new Scaffold(
       body: new Column(
-        children: <Widget>[pictureFrame, middleFrame, bottomnFrame, b],
+        children: <Widget>[pictureFrame, middleFrame, pictureAnimatedFrame],
       ),
     );
   }
