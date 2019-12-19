@@ -1,7 +1,7 @@
 enum PokemonType {
   NORMAL,
   FIRE,
-  FIGTHING,
+  FIGHTING,
   WATER,
   FLYING,
   GRASS,
@@ -16,6 +16,6 @@ enum PokemonType {
   GHOST,
   DARK,
   STEEL,
-  FAIRRY,
+  FAIRY,
   UNKNOWN
 }

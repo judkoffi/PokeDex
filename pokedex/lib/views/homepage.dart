@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/services/api.dart';
-import 'package:pokedex/views/pokemonprofile.dart';
+import 'package:pokedex/views/pokemondetail.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final API api = new API();
   dispose() {
     super.dispose();
   }
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  Card buildCard(Pokemon pokemon) {
+  Card _buildCard(Pokemon pokemon) {
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (context) => PokemonProfile(pokemon: pokemon),
+                builder: (context) => PokemonDetail(pokemon: pokemon),
               ),
             );
           },
@@ -75,24 +76,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget pokemons() {
-    return FutureBuilder(
-      builder: (context, promise) {
-        if (promise.connectionState == ConnectionState.none &&
-            promise.hasData == null) {
-          return Container();
+  Widget _body() {
+    return new FutureBuilder(
+      builder: (context, future) {
+        switch (future.connectionState) {
+          case ConnectionState.waiting:
+            return new SpinKitDoubleBounce(
+              color: Colors.white,
+            );
+          case ConnectionState.none:
+            return new Container();
+          default:
+            return ListView.builder(
+              itemCount: future.data.length,
+              itemBuilder: (context, index) => _buildCard(future.data[index]),
+            );
         }
-        if (promise.connectionState == ConnectionState.waiting) {
-          return new SpinKitDoubleBounce(
-            color: Colors.white,
-          );
-        }
-        return ListView.builder(
-          itemCount: promise.data.length,
-          itemBuilder: (context, index) => buildCard(promise.data[index]),
-        );
       },
-      future: API.getPokemons(),
+      future: api.getPokemons(),
     );
   }
 
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       ),
-      body: pokemons(),
+      body: _body(),
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
     );
   }
