@@ -45,7 +45,7 @@ class PokemonDetail extends StatelessWidget {
         new Container(
           padding: new EdgeInsets.only(left: 10.0),
           height: MediaQuery.of(context).size.height * 0.5,
-          child: new Image.network(pokemon.picture, fit: BoxFit.cover),
+          child: new Image.network(pokemon.sprites["large"], fit: BoxFit.cover),
         ),
         new Container(
           height: MediaQuery.of(context).size.height * 0.5,
@@ -110,7 +110,7 @@ class PokemonDetail extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).primaryColor,
       child: new Row(
-        children: <Widget>[_createRadiusRect(pokemon.pokemonInfos.weight)],
+        children: <Widget>[_createRadiusRect(pokemon.attack)],
       ),
     );
 

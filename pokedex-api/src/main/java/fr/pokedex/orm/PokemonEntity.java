@@ -15,7 +15,7 @@ public class PokemonEntity extends PanacheMongoEntity {
   public ObjectId _id;
   public double total;
   @BsonProperty("national_number")
-  public int id;
+  public String id;
   public String name;
   public Map<String, String> sprites;
   public List<String> type;

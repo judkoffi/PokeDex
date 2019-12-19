@@ -37,7 +37,7 @@ public class PokeService {
   }
 
   private static Pokemon entityToModel(PokemonEntity entity) {
-    var id = entity.id;
+    var id = Integer.parseInt(entity.id);
     var name = entity.name;
     var attack = entity.attack;
     var speed = entity.speed;

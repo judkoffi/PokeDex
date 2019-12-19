@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Image.network(
-              pokemon.picture,
+              pokemon.sprites["normal"],
               fit: BoxFit.cover,
             ),
           ),
@@ -53,11 +53,11 @@ class _HomePageState extends State<HomePage> {
           subtitle: Row(
             children: <Widget>[
               Icon(Icons.linear_scale, color: Colors.yellowAccent),
-              Text(pokemon.pokemonInfos.weight,
+              Text(pokemon.attack.toString(),
                   style: TextStyle(color: Colors.white)),
               Text(" "),
               Icon(Icons.linear_scale, color: Colors.yellowAccent),
-              Text(pokemon.pokemonInfos.height,
+              Text(pokemon.defense.toString(),
                   style: TextStyle(color: Colors.white))
             ],
           ),
