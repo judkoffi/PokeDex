@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/models/pokemon.dart';
 
 class PokemonDetail extends StatelessWidget {
   final Pokemon pokemon;
+  static final String baseUrl = 'http://vps743774.ovh.net:8080/icons';
 
   const PokemonDetail({Key key, this.pokemon}) : super(key: key);
 
@@ -96,6 +95,8 @@ class PokemonDetail extends StatelessWidget {
       ),
     );*/
 
+    final iconWidth = 50.0;
+
     final middleFrame = new Container(
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).primaryColor,
@@ -113,13 +114,24 @@ class PokemonDetail extends StatelessWidget {
           new Row(
             children: pokemon.types
                 .map(
-                  (type) => new DecoratedBox(
-                    decoration: new BoxDecoration(
-                      border: new Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(5.0),
+                  (type) => new SizedBox(
+                    width: iconWidth + 30,
+                    height: iconWidth + 30,
+                    child: new DecoratedBox(
+                      decoration: new BoxDecoration(
+                        border: new Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Image.network(
+                        baseUrl +
+                            '/' +
+                            (type.toString().split('.')[1]).toLowerCase() +
+                            '.png',
+                        fit: BoxFit.cover,
+                        width: iconWidth,
+                        height: iconWidth,
+                      ),
                     ),
-                    child: Image.network(pokemon.sprites["animated"],
-                        fit: BoxFit.cover),
                   ),
                 )
                 .toList(),
