@@ -1,11 +1,21 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pokedex/models/pokemon.dart';
+import 'package:pokedex/models/pokemon_basic.dart';
+import 'package:pokedex/models/pokemon_info.dart';
 
 class API {
   static final String baseUrl = 'http://vps743774.ovh.net:8080/v1';
-  final HashMap<int, Pokemon> cache = new HashMap();
+  final HashMap<int, PokemonBasic> cache = new HashMap();
+  static final API _instance = API._internal();
+
+  final Map headers = {'Content-Type': 'application/json'};
+
+  factory API() {
+    return _instance;
+  }
+
+  API._internal();
 
   Future getPokemons() async {
     var url = baseUrl + '/pokemons';
@@ -13,10 +23,9 @@ class API {
       return Future.value(List.of(cache.values));
     }
     try {
-      var request =
-          await http.get(url, headers: {'Content-Type': 'application/json'});
+      var request = await http.get(url, headers: headers);
       Iterable list = json.decode(utf8.decode(request.bodyBytes));
-      var pokemons = list.map((elt) => Pokemon.fromJson(elt)).toList();
+      var pokemons = list.map((elt) => PokemonBasic.fromJson(elt)).toList();
       pokemons
           .forEach((pokemon) => cache.putIfAbsent(pokemon.id, () => pokemon));
       return Future.value(pokemons);
@@ -25,10 +34,11 @@ class API {
     }
   }
 
-  Future getPokemon(int id) async {
-    var url = baseUrl + '/pokemon/' + id.toString();
+  Future getPokemon(String name) async {
+    var url = baseUrl + '/pokemon/' + name;
     try {
-      return http.get(url);
+      var response = await http.get(url, headers: headers);
+      return PokemonInfo.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     } catch (e) {
       print(e);
     }
