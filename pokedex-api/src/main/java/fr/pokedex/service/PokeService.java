@@ -15,7 +15,7 @@ public class PokeService {
   @Inject
   PokeRepository repository;
 
-  private final HashMap<Integer, Pokemon> cache;
+  private final HashMap<String, Pokemon> cache;
 
   public PokeService() {
     this.cache = new HashMap<>();
@@ -37,23 +37,22 @@ public class PokeService {
   }
 
   private static Pokemon entityToModel(PokemonEntity entity) {
+    System.out.println("hoho " + entity.name);
     var id = Integer.parseInt(entity.id);
     var name = entity.name;
     var attack = entity.attack;
     var speed = entity.speed;
     var defense = entity.defense;
     var total = entity.total;
-    var sprites = entity.sprites;    
+    var sprites = entity.sprites;
     var type = entity//
         .type//
           .stream()
           .map(PokeService::fromString)
           .collect(Collectors.toList());
 
-   return new Pokemon(total, id, name, sprites, attack, defense, speed, type);  
+    return new Pokemon(total, id, name, sprites, attack, defense, speed, type);
   }
-  
-  
 
   public List<Pokemon> getAll() {
     return repository
@@ -63,13 +62,13 @@ public class PokeService {
       .collect(Collectors.toList());
   }
 
-  public Pokemon findOne(String id) {
-    var key = Integer.parseInt(id);
-    if (cache.containsKey(key))
-      return cache.get(key);
+  public Pokemon find(String name) {
+    System.out.println("name "+name);
+    if (cache.containsKey(name))
+      return cache.get(name);
 
-    var pokemon = entityToModel(repository.find("id = ?1", key).firstResult());
-    cache.put(key, pokemon);
+    var pokemon = entityToModel(repository.find("name", name).firstResult());
+    cache.put(name, pokemon);
     return pokemon;
   }
 }

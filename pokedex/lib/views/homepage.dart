@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/services/api.dart';
+import 'package:pokedex/views/pokemondesc.dart';
 import 'package:pokedex/views/pokemondetail.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,10 +16,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final API api = new API();
+
+  @override
   dispose() {
     super.dispose();
   }
 
+  @override
   initState() {
     super.initState();
   }
@@ -67,7 +71,8 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (context) => PokemonDetail(pokemon: pokemon),
+                builder: (context) => PokemonDesc(
+                    id: pokemon.id), //PokemonDetail(pokemon: pokemon),
               ),
             );
           },
@@ -99,13 +104,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return new SafeArea(
+      child: new Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        ),
+        body: _body(),
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       ),
-      body: _body(),
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
     );
   }
 }

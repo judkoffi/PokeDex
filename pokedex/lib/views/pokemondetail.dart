@@ -10,43 +10,15 @@ class PokemonDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*final headerContainer = new Container(
-      child: new Container(
-        child: new LinearProgressIndicator(
-          backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-          value: 100,
-          valueColor: new AlwaysStoppedAnimation(Colors.green),
-        ),
-      ),
-    );
-
-    final topContentText = new Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        new SizedBox(height: 100.0),
-        new Container(
-          width: 90.0,
-          child: new Divider(color: Colors.green),
-        ),
-        new SizedBox(height: 10.0),
-        new Text(
-          pokemon.name,
-          style: new TextStyle(color: Colors.white, fontSize: 45.0),
-        ),
-        new SizedBox(height: 30.0),
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[headerContainer],
-        ),
-      ],
-    );*/
-
     final pictureFrame = new Stack(
       children: <Widget>[
         new Container(
           padding: new EdgeInsets.only(left: 10.0),
           height: MediaQuery.of(context).size.height * 0.5,
-          child: Image.network(pokemon.sprites["large"], fit: BoxFit.cover),
+          child: Image.network(
+            pokemon.sprites["large"],
+            fit: BoxFit.cover,
+          ),
         ),
         new Container(
           height: MediaQuery.of(context).size.height * 0.5,
@@ -74,7 +46,10 @@ class PokemonDetail extends StatelessWidget {
         new Container(
           padding: new EdgeInsets.only(left: 15.0),
           height: MediaQuery.of(context).size.height * 0.3,
-          child: Image.network(pokemon.sprites["animated"], fit: BoxFit.cover),
+          child: Image.network(
+            pokemon.sprites["animated"],
+            fit: BoxFit.cover,
+          ),
         ),
       ],
     );
@@ -95,8 +70,6 @@ class PokemonDetail extends StatelessWidget {
       ),
     );*/
 
-    final iconWidth = 50.0;
-
     final middleFrame = new Container(
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).primaryColor,
@@ -114,23 +87,17 @@ class PokemonDetail extends StatelessWidget {
           new Row(
             children: pokemon.types
                 .map(
-                  (type) => new SizedBox(
-                    width: iconWidth + 30,
-                    height: iconWidth + 30,
-                    child: new DecoratedBox(
-                      decoration: new BoxDecoration(
-                        border: new Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Image.network(
-                        baseUrl +
-                            '/' +
-                            (type.toString().split('.')[1]).toLowerCase() +
-                            '.png',
-                        fit: BoxFit.cover,
-                        width: iconWidth,
-                        height: iconWidth,
-                      ),
+                  (type) => new DecoratedBox(
+                    decoration: new BoxDecoration(
+                      border: new Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Image.network(
+                      baseUrl +
+                          '/' +
+                          (type.toString().split('.')[1]).toLowerCase() +
+                          '.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 )
@@ -140,9 +107,15 @@ class PokemonDetail extends StatelessWidget {
       ),
     );
 
-    return new Scaffold(
-      body: new Column(
-        children: <Widget>[pictureFrame, middleFrame, pictureAnimatedFrame],
+    return new SafeArea(
+      child: new Scaffold(
+        body: new Column(
+          children: <Widget>[
+            pictureFrame,
+            middleFrame,
+            pictureAnimatedFrame,
+          ],
+        ),
       ),
     );
   }

@@ -19,20 +19,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.0+2
-  flutter_spinkit: "^4.0.0"
-  enum_to_string: ^1.0.8
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  flutter_launcher_icons: ^0.7.2+1    
+  cupertino_icons: ^0.1.2 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  http: ^0.12.0+2
+  flutter_spinkit: "^4.0.0"
+  enum_to_string: ^1.0.8
+  flutter_launcher_icons: ^0.7.2+1   
 
 flutter_icons:
-  image_path: "assets/pokemon.png" 
+  image_path: "assets/app.png" 
   android: true
   ios: true  
 
