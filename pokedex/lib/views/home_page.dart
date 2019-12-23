@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final API api = new API();
+  final ScrollController _scrollController =
+      new ScrollController(keepScrollOffset: true);
 
   @override
   dispose() {
@@ -45,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Image.network(
-              new String.fromCharCodes(pokemon.picture.codeUnits),
+              String.fromCharCodes(pokemon.picture.codeUnits),
               fit: BoxFit.cover,
             ),
           ),
@@ -55,11 +57,24 @@ class _HomePageState extends State<HomePage> {
           ),
           subtitle: Row(
             children: <Widget>[
-              Icon(Icons.linear_scale, color: Colors.yellowAccent),
+              Image.asset(
+                'assets/battle.png',
+                width: 20,
+                height: 20,
+              ),
+
+              Text(" "),
+              //Icon(Icons.linear_scale, color: Colors.yellowAccent),
               Text(pokemon.attack.toString(),
                   style: TextStyle(color: Colors.white)),
               Text(" "),
-              Icon(Icons.linear_scale, color: Colors.yellowAccent),
+              //Icon(Icons.linear_scale, color: Colors.yellowAccent),
+              Image.asset(
+                'assets/shield.png',
+                width: 20,
+                height: 20,
+              ),
+              Text(" "),
               Text(pokemon.defense.toString(),
                   style: TextStyle(color: Colors.white))
             ],
@@ -94,10 +109,11 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: future.data.length,
               itemBuilder: (context, index) => _buildCard(future.data[index]),
+              controller: _scrollController,
             );
         }
       },
-      future: api.getPokemons(),
+      future: api.getAll(),
     );
   }
 

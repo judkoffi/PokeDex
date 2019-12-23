@@ -14,7 +14,7 @@ class PokemonInfo {
   PokemonInfo(this.id, this.name, this.sprites, this.types, this.attack,
       this.defense, this.speed);
 
-  PokemonInfo.fromJson(Map json) {
+  PokemonInfo.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.name = json['name'];
     this.attack = json['attack'];

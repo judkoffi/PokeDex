@@ -7,8 +7,8 @@ class PokemonBasic {
 
   PokemonBasic(this.id, this.name, this.attack, this.defense, this.picture);
 
-  PokemonBasic.fromJson(Map json) {
-    this.id = json['id'];
+  PokemonBasic.fromJson(Map<String, dynamic> json) {
+    this.id = json ['id'];
     this.name = json['name'];
     this.attack = json['attack'];
     this.defense = json['defense'];

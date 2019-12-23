@@ -48,7 +48,7 @@ class PokemonDetail extends StatelessWidget {
       children: <Widget>[
         new Container(
           padding: new EdgeInsets.only(left: 15.0),
-          height: MediaQuery.of(context).size.height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.35,
           child: Image.network(
             pokemon.sprites["animated"],
             fit: BoxFit.cover,
@@ -129,7 +129,6 @@ class PokemonDetail extends StatelessWidget {
     return new SafeArea(
       child: new Scaffold(
         body: _body(),
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       ),
     );
   }
