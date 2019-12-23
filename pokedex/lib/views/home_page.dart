@@ -32,8 +32,8 @@ class _HomePageState extends State<HomePage> {
     return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-      child: Container(
-        decoration: BoxDecoration(
+      child: new Container(
+        decoration: new BoxDecoration(
           color: Color.fromRGBO(64, 75, 96, 0.9),
         ),
         child: new ListTile(
@@ -86,7 +86,8 @@ class _HomePageState extends State<HomePage> {
               context,
               new MaterialPageRoute(
                 builder: (context) => PokemonDetail(
-                    name: pokemon.name), //PokemonDetail(pokemon: pokemon),
+                  name: pokemon.name,
+                ), //PokemonDetail(pokemon: pokemon),
               ),
             );
           },
@@ -121,9 +122,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new SafeArea(
       child: new Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        appBar: new AppBar(
+          title: new Text(
+            widget.title,
+          ),
         ),
         body: _body(),
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
