@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import fr.pokedex.model.Pokemon;
-import fr.pokedex.model.Pokemon.POKEMONTYPES;
+import fr.pokedex.model.PokemonBasic;
+import fr.pokedex.model.PokemonInfo;
+import fr.pokedex.model.PokemonInfo.POKEMONTYPES;
 import fr.pokedex.orm.PokeRepository;
 import fr.pokedex.orm.PokemonEntity;
 
@@ -15,7 +16,7 @@ public class PokeService {
   @Inject
   PokeRepository repository;
 
-  private final HashMap<Integer, Pokemon> cache;
+  private final HashMap<String, PokemonInfo> cache;
 
   public PokeService() {
     this.cache = new HashMap<>();
@@ -36,48 +37,41 @@ public class PokeService {
     return getEnumFromString(POKEMONTYPES.class, name);
   }
 
-  private static Pokemon entityToModel(PokemonEntity entity) {
-    var id = entity.id;
+  private static PokemonInfo entityToModel(PokemonEntity entity) {
+    var id = Integer.parseInt(entity.id);
     var name = entity.name;
-    var num = entity.num;
-    var img = entity.img;
-    var avgSpawns = entity.avgSpawns;
-    var candy = entity.candy;
-    var spawn = entity.spawn;
-    var spawnTime = entity.spawnTime;
-    var egg = entity.egg;
-    var height = entity.height;
-    var weight = entity.weight;
-    var type = entity//
-        .type//
-          .stream()
-          .map(PokeService::fromString)
-          .collect(Collectors.toList());
-    var weakness = entity.//
-        weaknesses//
-          .stream()
-          .map(PokeService::fromString)
-          .collect(Collectors.toList());
-
-    return new Pokemon(id, name, img, num, spawn, avgSpawns, spawnTime, height, weight, candy, egg,
-        type, weakness);
+    var attack = entity.attack;
+    var speed = entity.speed;
+    var defense = entity.defense;
+    var total = entity.total;
+    var sprites = entity.sprites;
+    var type = entity.type.stream().map(PokeService::fromString).collect(Collectors.toList());
+    return new PokemonInfo(total, id, name, sprites, attack, defense, speed, type);
   }
 
-  public List<Pokemon> getAll() {
+  private static PokemonBasic entityToBasicModel(PokemonEntity entity) {
+    var id = Integer.parseInt(entity.id);
+    var name = entity.name;
+    var attack = entity.attack;
+    var defense = entity.defense;
+    var picture = entity.sprites.get("normal");
+    return new PokemonBasic(id, name, attack, defense, picture);
+  }
+
+  public List<PokemonBasic> getAll() {
     return repository
       .findAll()
       .stream()
-      .map(PokeService::entityToModel)
+      .map(PokeService::entityToBasicModel)
       .collect(Collectors.toList());
   }
 
-  public Pokemon findOne(String id) {
-    var key = Integer.parseInt(id);
-    if (cache.containsKey(key))
-      return cache.get(key);
+  public PokemonInfo find(String name) {
+    if (cache.containsKey(name))
+      return cache.get(name);
 
-    var pokemon = entityToModel(repository.find("id = ?1", key).firstResult());
-    cache.put(key, pokemon);
+    var pokemon = entityToModel(repository.find("name", name).firstResult());
+    cache.put(name, pokemon);
     return pokemon;
   }
 }

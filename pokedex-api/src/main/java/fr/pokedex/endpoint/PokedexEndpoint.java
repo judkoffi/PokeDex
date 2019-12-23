@@ -25,8 +25,8 @@ public class PokedexEndpoint {
     return Response.ok().entity(pokemons).build();
   }
 
-  private boolean checkIdParam(String id) {
-    return !id.isBlank() && !id.isEmpty() && id.matches("^[0-9]*$");
+  private boolean checkIdParam(String name) {
+    return !name.isBlank() && !name.isEmpty();
   }
 
   @GET
@@ -35,7 +35,7 @@ public class PokedexEndpoint {
     if (!checkIdParam(id))
       return Response.status(400).build();
 
-    var pokemon = service.findOne(id);
+    var pokemon = service.find(id);
     return Response.ok().entity(pokemon).build();
   }
 
