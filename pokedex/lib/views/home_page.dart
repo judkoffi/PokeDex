@@ -98,20 +98,20 @@ class _HomePageState extends State<HomePage> {
 
   Widget _body() {
     return new FutureBuilder(
-      builder: (context, future) {
-        switch (future.connectionState) {
-          case ConnectionState.waiting:
-            return new SpinKitDoubleBounce(
-              color: Colors.white,
-            );
-          case ConnectionState.none:
-            return new Container();
-          default:
-            return ListView.builder(
-              itemCount: future.data.length,
-              itemBuilder: (context, index) => _buildCard(future.data[index]),
-              controller: _scrollController,
-            );
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasError) {
+          return new Container();
+        }
+        if (snapshot.hasData && snapshot.data != null) {
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) => _buildCard(snapshot.data[index]),
+            controller: _scrollController,
+          );
+        } else {
+          return new SpinKitDoubleBounce(
+            color: Colors.white,
+          );
         }
       },
       future: api.getAll(),

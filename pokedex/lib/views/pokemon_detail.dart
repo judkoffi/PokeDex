@@ -133,16 +133,16 @@ class PokemonDetail extends StatelessWidget {
     return new SafeArea(
       child: new Scaffold(
         body: new FutureBuilder(
-          builder: (context, future) {
-            switch (future.connectionState) {
-              case ConnectionState.waiting:
-                return new SpinKitWave(
-                  color: Color.fromRGBO(64, 75, 96, 0.9),
-                );
-              case ConnectionState.none:
-                return new Container();
-              default:
-                return _buildProfile(future.data, context);
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) {
+              return new Container();
+            }
+            if (snapshot.hasData && snapshot.data != null) {
+              return _buildProfile(snapshot.data, context);
+            } else {
+              return new SpinKitWave(
+                color: Color.fromRGBO(64, 75, 96, 0.9),
+              );
             }
           },
           future: api.getPokemon(name),
