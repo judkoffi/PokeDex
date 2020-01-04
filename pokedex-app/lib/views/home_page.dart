@@ -18,6 +18,11 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController =
       new ScrollController(keepScrollOffset: true);
 
+  //Color.fromRGBO(58, 66, 86, 1.0)
+
+  final Color _color = Color.fromARGB(255, 16, 88, 102);
+  final Color _backgroundColor = Color.fromARGB(255, 88, 102, 105);
+
   @override
   dispose() {
     super.dispose();
@@ -30,64 +35,93 @@ class _HomePageState extends State<HomePage> {
 
   Card _buildCard(PokemonBasic pokemon) {
     return Card(
-      elevation: 8.0,
-      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      elevation: 2.0,
+      margin: new EdgeInsets.symmetric(
+        horizontal: 5.0,
+        vertical: 5.0,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
       child: new Container(
         decoration: new BoxDecoration(
-          color: Color.fromRGBO(64, 75, 96, 0.9),
+          color: _color,
+          borderRadius: BorderRadius.circular(
+            15.0,
+          ),
         ),
         child: new ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 10.0,
+          ),
+          leading: new Container(
+            padding: EdgeInsets.only(
+              right: 12.0,
+            ),
             decoration: new BoxDecoration(
               border: new Border(
-                right: new BorderSide(width: 1.0, color: Colors.white24),
+                right: new BorderSide(
+                  width: 3.0,
+                  color: Colors.white24,
+                ),
               ),
             ),
             child: Image.network(
-              String.fromCharCodes(pokemon.picture.codeUnits),
+              String.fromCharCodes(
+                pokemon.picture.codeUnits,
+              ),
               fit: BoxFit.cover,
             ),
           ),
           title: Text(
             pokemon.name,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          subtitle: Row(
+          subtitle: new Row(
             children: <Widget>[
               Image.asset(
                 'assets/battle.png',
                 width: 20,
                 height: 20,
               ),
-
-              Text(" "),
-              //Icon(Icons.linear_scale, color: Colors.yellowAccent),
-              Text(pokemon.attack.toString(),
-                  style: TextStyle(color: Colors.white)),
-              Text(" "),
-              //Icon(Icons.linear_scale, color: Colors.yellowAccent),
+              new Text(" "),
+              new Text(
+                pokemon.attack.toString(),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              new Text(" "),
               Image.asset(
                 'assets/shield.png',
                 width: 20,
                 height: 20,
               ),
-              Text(" "),
-              Text(pokemon.defense.toString(),
-                  style: TextStyle(color: Colors.white))
+              new Text(" "),
+              new Text(
+                pokemon.defense.toString(),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              )
             ],
           ),
-          trailing:
-              Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+          trailing: new Icon(
+            Icons.keyboard_arrow_right,
+            color: Colors.white,
+            size: 30.0,
+          ),
           onTap: () {
             Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (context) => PokemonDetail(
+                builder: (context) => new PokemonDetail(
                   name: pokemon.name,
-                ), //PokemonDetail(pokemon: pokemon),
+                ),
               ),
             );
           },
@@ -110,7 +144,7 @@ class _HomePageState extends State<HomePage> {
           );
         } else {
           return new SpinKitDoubleBounce(
-            color: Colors.white,
+            color: _backgroundColor,
           );
         }
       },
@@ -128,7 +162,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: _body(),
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        backgroundColor: _backgroundColor,
       ),
     );
   }

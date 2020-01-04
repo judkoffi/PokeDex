@@ -1,7 +1,7 @@
 package fr.pokedex.service;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -25,7 +25,8 @@ public class PokeService {
   private static <T extends Enum<T>> T getEnumFromString(Class<T> declaringClass, String str) {
     if (declaringClass != null && str != null) {
       try {
-        return Enum.valueOf(declaringClass, str.trim().toUpperCase());
+        return Enum.valueOf(declaringClass, str.trim()
+          .toUpperCase());
       } catch (IllegalArgumentException e) {
         throw new AssertionError(e);
       }
@@ -45,7 +46,9 @@ public class PokeService {
     var defense = entity.defense;
     var total = entity.total;
     var sprites = entity.sprites;
-    var type = entity.type.stream().map(PokeService::fromString).collect(Collectors.toList());
+    var type = entity.type.stream()
+      .map(PokeService::fromString)
+      .collect(Collectors.toList());
     return new PokemonInfo(total, id, name, sprites, attack, defense, speed, type);
   }
 
@@ -58,19 +61,19 @@ public class PokeService {
     return new PokemonBasic(id, name, attack, defense, picture);
   }
 
-  public List<PokemonBasic> getAll() {
-    return repository
-      .findAll()
+  public Set<PokemonBasic> getAll() {
+    return repository.findAll()
       .stream()
       .map(PokeService::entityToBasicModel)
-      .collect(Collectors.toList());
+      .collect(Collectors.toSet());
   }
 
   public PokemonInfo find(String name) {
     if (cache.containsKey(name))
       return cache.get(name);
 
-    var pokemon = entityToModel(repository.find("name", name).firstResult());
+    var pokemon = entityToModel(repository.find("name", name)
+      .firstResult());
     cache.put(name, pokemon);
     return pokemon;
   }

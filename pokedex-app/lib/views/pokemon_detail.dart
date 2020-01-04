@@ -15,6 +15,7 @@ class PokemonDetail extends StatelessWidget {
       GlobalConfiguration().getString("ICONS_URL");
 
   final api = new API();
+  final Color _color = Color.fromARGB(255, 16, 88, 102);
 
   Column _buildProfile(PokemonInfo pokemon, BuildContext context) {
     final pictureFrame = new Stack(
@@ -50,7 +51,9 @@ class PokemonDetail extends StatelessWidget {
     final pictureAnimatedFrame = new Stack(
       children: <Widget>[
         new Container(
-          padding: new EdgeInsets.only(left: 15.0),
+          padding: new EdgeInsets.only(
+            left: 5.0,
+          ),
           height: MediaQuery.of(context).size.height * 0.35,
           child: Image.network(
             pokemon.sprites["animated"],
@@ -81,8 +84,12 @@ class PokemonDetail extends StatelessWidget {
           1,
           new DecoratedBox(
             decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(5.0),
+              border: new Border.all(
+                color: Colors.white,
+              ),
+              borderRadius: BorderRadius.circular(
+                5.0,
+              ),
             ),
             child: new SizedBox(
               width: 10,
@@ -94,14 +101,16 @@ class PokemonDetail extends StatelessWidget {
 
     final middleFrame = new Container(
       width: MediaQuery.of(context).size.width,
-      color: Color.fromRGBO(64, 75, 96, 0.9),
+      color: _color,
       child: new ListTile(
-        leading: Container(
-          padding: EdgeInsets.only(right: 12.0),
+        leading: new Container(
+          padding: EdgeInsets.only(
+            right: 12.0,
+          ),
           decoration: new BoxDecoration(
             border: new Border(
               right: new BorderSide(
-                width: 1.0,
+                width: 3.0,
                 color: Colors.black,
               ),
             ),
@@ -110,12 +119,14 @@ class PokemonDetail extends StatelessWidget {
             pokemon.name,
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.normal,
-              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal,
             ),
           ),
         ),
-        title: new Row(children: widgets),
+        title: new Row(
+          children: widgets,
+        ),
       ),
     );
 

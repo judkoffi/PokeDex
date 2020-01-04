@@ -16,15 +16,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final Color _color = Color.fromARGB(255, 16, 88, 102);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PokeDex',
       theme: new ThemeData(
-        primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
+        primaryColor: _color,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(title: 'Pokedex'),
+      home: new HomePage(title: 'Pokedex'),
     );
   }
 }

@@ -7,7 +7,6 @@ import 'package:pokedex/models/pokemon_info.dart';
 class API {
   static final String baseUrl = 'http://vps743774.ovh.net:8080/v1';
   static final API _instance = API._internal();
-  final Set<PokemonBasic> cacheBasicPokemon = new Set();
   final HashMap<String, PokemonInfo> cachePokemon = new HashMap();
 
   factory API() {
@@ -17,17 +16,14 @@ class API {
   API._internal();
 
   Future<List<PokemonBasic>> getAll() async {
-    if (cacheBasicPokemon.isNotEmpty)
-      return Future.value(cacheBasicPokemon.toList());
-
     var url = baseUrl + '/pokemons';
     try {
       var response =
           await http.get(url, headers: {'Content-Type': 'application/json'});
       Iterable list = json.decode(utf8.decode(response.bodyBytes));
-      var elts = list.map((elt) => PokemonBasic.fromJson(elt)).toList();
-      cacheBasicPokemon.addAll(elts);
-      return Future.value(cacheBasicPokemon.toList());
+      return Future.value(list
+          .map((elt) => PokemonBasic.fromJson(elt)) //
+          .toList());
     } catch (e) {
       print(e);
     }
