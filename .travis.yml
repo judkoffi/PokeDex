@@ -5,5 +5,5 @@ os:
   - linux
 
 script:
-  - cd pokedex-api
+  - cd api
   - ./mvnw clean package
