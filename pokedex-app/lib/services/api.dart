@@ -26,6 +26,7 @@ class API {
           .toList());
     } catch (e) {
       print(e);
+      return new List();
     }
   }
 
@@ -35,14 +36,17 @@ class API {
     }
     var url = baseUrl + '/pokemon/' + name;
     try {
-      var response =
-          await http.get(url, headers: {'Content-Type': 'application/json'});
+      var response = await http.get(
+        url,
+        headers: {'Content-Type': 'application/json'},
+      );
       var pokemon =
           PokemonInfo.fromJson(json.decode(utf8.decode(response.bodyBytes)));
       cachePokemon.putIfAbsent(name, () => pokemon);
       return Future.value(pokemon);
     } catch (e) {
       print(e);
+      return null;
     }
   }
 }

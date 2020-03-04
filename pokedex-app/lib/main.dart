@@ -17,6 +17,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Color _color = Color.fromARGB(255, 16, 88, 102);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
