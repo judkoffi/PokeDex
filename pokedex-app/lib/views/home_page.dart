@@ -15,13 +15,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final API api = new API();
-  final ScrollController _scrollController =
-      new ScrollController(keepScrollOffset: true);
+  final ScrollController _scrollController = new ScrollController(
+    keepScrollOffset: true,
+  );
 
   //Color.fromRGBO(58, 66, 86, 1.0)
-
   final Color _color = Color.fromARGB(255, 16, 88, 102);
-  final Color _backgroundColor = Color.fromARGB(255, 88, 102, 105);
+  final Color _backgroundColor = Color.fromRGBO(58, 66, 86, 1.0);
 
   @override
   dispose() {
